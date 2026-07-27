@@ -37,11 +37,16 @@
         wakeup-source;
         diode-direction = "col2row";
 
+        /*
+         * col2row wiring (confirmed from official ZMK lily58 shield):
+         * - Rows are OUTPUTS: GPIO_ACTIVE_HIGH, no pull
+         * - Cols are INPUTS:  GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN
+         */
         row-gpios
-            = <&gpio0 31 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   /* Row 1 - D21 - P0.31 */
-            , <&gpio0 29 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   /* Row 2 - D20 - P0.29 */
-            , <&gpio0 2  (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   /* Row 3 - D19 - P0.02 */
-            , <&gpio1 15 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   /* Row 4 - D18 - P1.15 */
+            = <&gpio0 31 GPIO_ACTIVE_HIGH>   /* Row 1 - D21 - P0.31 */
+            , <&gpio0 29 GPIO_ACTIVE_HIGH>   /* Row 2 - D20 - P0.29 */
+            , <&gpio0 2  GPIO_ACTIVE_HIGH>   /* Row 3 - D19 - P0.02 */
+            , <&gpio1 15 GPIO_ACTIVE_HIGH>   /* Row 4 - D18 - P1.15 */
             ;
     };
 };
