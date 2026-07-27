@@ -9,13 +9,13 @@
     };
 
     /*
-     * Matrix transform for midnight52
-     * 4 rows x 8 cols per side = 16 cols total (left=0-7, right=8-15)
-     * Dead switches: RC(0,6), RC(0,7), RC(1,6), RC(1,7), RC(2,6), RC(2,7)
-     *                RC(0,14), RC(0,15), RC(1,14), RC(1,15), RC(2,14), RC(2,15)
+     * midnight52 - col2row wiring
+     * 4 rows x 8 cols per side, 16 cols total
      *
-     * Key positions (52 total):
-     *  0  1  2  3  4  5                    6  7  8  9  10 11
+     * Dead positions (no switch): rows 1-3 on cols 7+8 (both sides)
+     *
+     * Key positions (52 keys total):
+     *  0  1  2  3  4  5                    6  7  8  9 10 11
      * 12 13 14 15 16 17                   18 19 20 21 22 23
      * 24 25 26 27 28 29                   30 31 32 33 34 35
      * 36 37 38 39 40 41 42 43    44 45 46 47 48 49 50 51
@@ -25,9 +25,9 @@
         columns = <16>;
         rows = <4>;
         map = <
-            RC(0,0) RC(0,1) RC(0,2) RC(0,3) RC(0,4) RC(0,5)                                     RC(0,10) RC(0,11) RC(0,12) RC(0,13) RC(0,14) RC(0,15)
-            RC(1,0) RC(1,1) RC(1,2) RC(1,3) RC(1,4) RC(1,5)                                     RC(1,10) RC(1,11) RC(1,12) RC(1,13) RC(1,14) RC(1,15)
-            RC(2,0) RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5)                                     RC(2,10) RC(2,11) RC(2,12) RC(2,13) RC(2,14) RC(2,15)
+            RC(0,0) RC(0,1) RC(0,2) RC(0,3) RC(0,4) RC(0,5)                                           RC(0,8) RC(0,9) RC(0,10) RC(0,11) RC(0,12) RC(0,13)
+            RC(1,0) RC(1,1) RC(1,2) RC(1,3) RC(1,4) RC(1,5)                                           RC(1,8) RC(1,9) RC(1,10) RC(1,11) RC(1,12) RC(1,13)
+            RC(2,0) RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5)                                           RC(2,8) RC(2,9) RC(2,10) RC(2,11) RC(2,12) RC(2,13)
             RC(3,0) RC(3,1) RC(3,2) RC(3,3) RC(3,4) RC(3,5) RC(3,6) RC(3,7)  RC(3,8) RC(3,9) RC(3,10) RC(3,11) RC(3,12) RC(3,13) RC(3,14) RC(3,15)
         >;
     };
@@ -37,16 +37,11 @@
         wakeup-source;
         diode-direction = "col2row";
 
-        /*
-         * Using &pro_micro pin numbers (Arduino labels on the board silkscreen).
-         * Rows are outputs (GPIO_ACTIVE_HIGH, no pull).
-         * pro_micro 21 = P0.31, 20 = P0.29, 19 = P0.02, 18 = P1.15
-         */
         row-gpios
-            = <&pro_micro 21 GPIO_ACTIVE_HIGH>   /* Row 1 - D21 */
-            , <&pro_micro 20 GPIO_ACTIVE_HIGH>   /* Row 2 - D20 */
-            , <&pro_micro 19 GPIO_ACTIVE_HIGH>   /* Row 3 - D19 */
-            , <&pro_micro 18 GPIO_ACTIVE_HIGH>   /* Row 4 - D18 */
+            = <&pro_micro 21 GPIO_ACTIVE_HIGH>   /* Row 1 */
+            , <&pro_micro 20 GPIO_ACTIVE_HIGH>   /* Row 2 */
+            , <&pro_micro 19 GPIO_ACTIVE_HIGH>   /* Row 3 */
+            , <&pro_micro 18 GPIO_ACTIVE_HIGH>   /* Row 4 */
             ;
     };
 };
